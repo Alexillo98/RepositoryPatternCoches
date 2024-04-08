@@ -4,7 +4,7 @@ public class CocheService {
     static java.sql.Connection con;
 
     public static java.sql.Connection getCon(){
-        String host = "jdbc:sqlite:src/main/resources/coche.sqlite";
+        String host = "jdbc:sqlite:src/main/resources/coche";
 
         if (con == null){
             try {
