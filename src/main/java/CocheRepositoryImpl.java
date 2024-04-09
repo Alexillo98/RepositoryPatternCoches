@@ -1,10 +1,10 @@
-import javax.swing.plaf.nimbus.State;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CocheRepositoryImpl implements IRepository<Coche> {
 
@@ -49,11 +49,19 @@ public class CocheRepositoryImpl implements IRepository<Coche> {
 
     @Override
     public void delete(Coche entity) throws SQLException {
+        Scanner escaner = new Scanner(System.in);
 
+        System.out.println("ID de coche a eliminar:");
+        int identificacion = Integer.parseInt(escaner.next());
+
+        String query = "DELETE FROM coche WHERE id = ?";
+        PreparedStatement st = CocheService.con.prepareStatement(query);
+        st.setInt(1,identificacion);
+        st.executeUpdate();
     }
 
     @Override
     public Coche bdToEntity(ResultSet rs) throws SQLException {
-        return new Coche(rs.getInt("id"),rs.getString("Marca"));
+        return new Coche(rs.getInt("id"),rs.getString("marca"));
     }
 }
